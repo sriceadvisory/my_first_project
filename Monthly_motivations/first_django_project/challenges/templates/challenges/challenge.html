@@ -1,0 +1,22 @@
+{% extends "base.html" %}{#Used to load in a template file. Content must be wrapped in corresponding tags to be used in a tag format#}
+{% load static %}{#Needed in order to be able to load static files. You have to put this in every file using static files.#}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "challenges/index.css" %}">{#Linking css and other sheets like Javascript to the file you are working on#}
+    <link rel="stylesheet" href="{% static "challenges/challenge.css" %}">
+    <link rel="stylesheet" href="{% static "challenges/includes/header.css" %}">
+{% endblock %}
+
+{% block page_title %}{#Used as a wrap for the corresponding template. It will be wrapped in the same class of DTL and mimick the template#}
+    {{ month_name | title }}  Challenges{#|Title is a tag that allows for a preset styling without CSS. It can be used to design html#}
+{% endblock  %}
+
+{% block  content%}
+    {% include "challenges/includes/header.html" %}
+    <h1>{{ month_name | title }} Challenges</h1>
+    {% if text is not None %}{#{% content%} = operating much like python while operating inside of HTML#}
+        <h2>{{ text }}</h2>
+    {% else %}
+        <p class="fallback">There is no challenge for this month yet!</p>
+    {% endif %}
+{% endblock  %}
